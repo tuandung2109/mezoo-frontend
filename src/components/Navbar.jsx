@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart, FaHistory } from 'react-icons/fa';
+import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart, FaHistory, FaCrown, FaCog } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SearchBar from './SearchBar';
 import { notificationService } from '../services/notificationService';
@@ -95,6 +95,15 @@ function Navbar() {
             <button onClick={() => navigate('/trending')} className="hover:text-gray-300 transition">Mới & Phổ biến</button>
             <button onClick={() => navigate('/my-list')} className="hover:text-gray-300 transition">Danh sách của tôi</button>
             <button onClick={() => navigate('/history')} className="hover:text-gray-300 transition">Lịch sử</button>
+            {user?.role === 'admin' && (
+              <button 
+                onClick={() => navigate('/admin')} 
+                className="flex items-center space-x-1 text-orange-400 hover:text-orange-300 transition font-semibold"
+              >
+                <FaCog />
+                <span>Quản trị</span>
+              </button>
+            )}
           </div>
         </div>
         
@@ -243,6 +252,24 @@ function Navbar() {
                       <FaUser size={14} />
                       <span>Tài khoản</span>
                     </button>
+                    <button 
+                      onClick={() => navigate('/subscription')}
+                      className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                    >
+                      <FaCrown size={14} />
+                      <span>Gói đăng ký</span>
+                    </button>
+                    
+                    {user?.role === 'admin' && (
+                      <button 
+                        onClick={() => { navigate('/admin'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2 text-orange-400"
+                      >
+                        <FaCog size={14} />
+                        <span>Quản trị</span>
+                      </button>
+                    )}
+                    
                     <button 
                       onClick={() => {
                         logout();
