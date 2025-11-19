@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaCaretDown, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SearchBar from './SearchBar';
 
@@ -39,9 +39,7 @@ function Navbar() {
             <button onClick={() => navigate('/')} className="hover:text-gray-300 transition">Trang chủ</button>
             <button onClick={() => navigate('/movies')} className="hover:text-gray-300 transition">Phim</button>
             <button onClick={() => navigate('/trending')} className="hover:text-gray-300 transition">Mới & Phổ biến</button>
-            {/* <a href="/series" className="hover:text-gray-300 transition">Phim bộ</a> */}
-            {/* <a href="/new" className="hover:text-gray-300 transition">Mới & Phổ biến</a> */}
-            <a href="/my-list" className="hover:text-gray-300 transition">Danh sách của tôi</a>
+            <button onClick={() => navigate('/my-list')} className="hover:text-gray-300 transition">Danh sách của tôi</button>
           </div>
         </div>
         
@@ -78,6 +76,39 @@ function Navbar() {
                       <p className="text-sm font-semibold">{user?.fullName}</p>
                       <p className="text-xs text-gray-400">{user?.email}</p>
                     </div>
+
+                    {/* Mobile Menu Items - Only show on mobile */}
+                    <div className="md:hidden border-b border-gray-700">
+                      <button 
+                        onClick={() => { navigate('/'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                      >
+                        <FaHome size={14} />
+                        <span>Trang chủ</span>
+                      </button>
+                      <button 
+                        onClick={() => { navigate('/movies'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                      >
+                        <FaFilm size={14} />
+                        <span>Phim</span>
+                      </button>
+                      <button 
+                        onClick={() => { navigate('/trending'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                      >
+                        <FaFire size={14} />
+                        <span>Mới & Phổ biến</span>
+                      </button>
+                      <button 
+                        onClick={() => { navigate('/my-list'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                      >
+                        <FaHeart size={14} />
+                        <span>Danh sách của tôi</span>
+                      </button>
+                    </div>
+
                     <button 
                       onClick={() => navigate('/profile')}
                       className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
@@ -109,6 +140,8 @@ function Navbar() {
           )}
         </div>
       </div>
+
+
     </nav>
   );
 }

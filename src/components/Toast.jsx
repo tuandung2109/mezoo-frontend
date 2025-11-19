@@ -13,16 +13,18 @@ function Toast({ message, type = 'success', onClose, duration = 3000 }) {
 
   const icons = {
     success: <FaCheckCircle className="text-green-400" />,
-    error: <FaExclamationCircle className="text-red-400" />
+    error: <FaExclamationCircle className="text-red-400" />,
+    info: <FaCheckCircle className="text-white" />
   };
 
   const colors = {
     success: 'bg-green-500/10 border-green-500',
-    error: 'bg-red-500/10 border-red-500'
+    error: 'bg-red-500/10 border-red-500',
+    info: 'bg-black/80 border-gray-700'
   };
 
   return (
-    <div className="fixed top-20 right-4 z-50 animate-slide-in-right">
+    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
       <div className={`${colors[type]} border rounded-lg shadow-2xl backdrop-blur-lg p-4 pr-12 min-w-[300px] max-w-md`}>
         <div className="flex items-start space-x-3">
           <div className="text-xl mt-0.5">

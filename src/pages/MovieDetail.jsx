@@ -101,7 +101,7 @@ function MovieDetail() {
       } else {
         await userService.addToFavorites(id);
         setIsFavorite(true);
-        showToast('Đã thêm vào danh sách yêu thích ❤️');
+        showToast('Đã thêm vào danh sách yêu thích');
       }
     } catch (error) {
       showToast(error.response?.data?.message || 'Có lỗi xảy ra', 'error');
@@ -122,7 +122,7 @@ function MovieDetail() {
       } else {
         await userService.addToWatchlist(id);
         setIsInWatchlist(true);
-        showToast('Đã thêm vào danh sách xem sau 📝');
+        showToast('Đã thêm vào danh sách xem sau');
       }
     } catch (error) {
       showToast(error.response?.data?.message || 'Có lỗi xảy ra', 'error');
@@ -136,7 +136,7 @@ function MovieDetail() {
     switch (platform) {
       case 'copy':
         navigator.clipboard.writeText(url);
-        showToast('Đã copy link! 📋');
+        showToast('Đã copy link!');
         setShowShareModal(false);
         break;
       case 'facebook':
