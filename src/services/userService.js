@@ -1,17 +1,23 @@
 import api from './api';
 
 export const userService = {
+  // My List (combined favorites + watchlist)
+  getMyList: async () => {
+    const response = await api.get('/users/me/list');
+    return response.data.data;
+  },
+
   // Favorites
   getFavorites: () => {
     return api.get('/users/favorites');
   },
 
   addToFavorites: (movieId) => {
-    return api.post(`/users/favorites/${movieId}`);
+    return api.post(`/users/me/favorites/${movieId}`);
   },
 
   removeFromFavorites: (movieId) => {
-    return api.delete(`/users/favorites/${movieId}`);
+    return api.delete(`/users/me/favorites/${movieId}`);
   },
 
   // Watchlist
@@ -20,11 +26,11 @@ export const userService = {
   },
 
   addToWatchlist: (movieId) => {
-    return api.post(`/users/watchlist/${movieId}`);
+    return api.post(`/users/me/watchlist/${movieId}`);
   },
 
   removeFromWatchlist: (movieId) => {
-    return api.delete(`/users/watchlist/${movieId}`);
+    return api.delete(`/users/me/watchlist/${movieId}`);
   },
 
   // Watch History

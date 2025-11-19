@@ -37,9 +37,10 @@ function Navbar() {
           </h1>
           <div className="hidden md:flex space-x-6 text-sm">
             <button onClick={() => navigate('/')} className="hover:text-gray-300 transition">Trang chủ</button>
-            <button onClick={() => navigate('/search')} className="hover:text-gray-300 transition">Phim</button>
-            <a href="/series" className="hover:text-gray-300 transition">Phim bộ</a>
-            <a href="/new" className="hover:text-gray-300 transition">Mới & Phổ biến</a>
+            <button onClick={() => navigate('/movies')} className="hover:text-gray-300 transition">Phim</button>
+            <button onClick={() => navigate('/trending')} className="hover:text-gray-300 transition">Mới & Phổ biến</button>
+            {/* <a href="/series" className="hover:text-gray-300 transition">Phim bộ</a> */}
+            {/* <a href="/new" className="hover:text-gray-300 transition">Mới & Phổ biến</a> */}
             <a href="/my-list" className="hover:text-gray-300 transition">Danh sách của tôi</a>
           </div>
         </div>
