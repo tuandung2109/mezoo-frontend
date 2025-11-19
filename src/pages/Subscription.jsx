@@ -7,16 +7,19 @@ import Toast from '../components/Toast';
 import { FaCheck, FaCrown, FaStar, FaRocket, FaGift } from 'react-icons/fa';
 
 function Subscription() {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading } = useAuth();
   const navigate = useNavigate();
   const [toast, setToast] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState(null);
 
   useEffect(() => {
+    // Đợi auth loading xong
+    if (loading) return;
+
     if (!isAuthenticated) {
       navigate('/login');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, loading]);
 
   const plans = [
     {

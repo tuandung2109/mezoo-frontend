@@ -1,33 +1,25 @@
 import api from './api';
 
 export const reviewService = {
-  // Get reviews for a movie
-  getMovieReviews: (movieId, sort = 'newest') => {
-    return api.get(`/reviews/movie/${movieId}?sort=${sort}`);
+  // Admin endpoints
+  getAllReviews: async (params) => {
+    const response = await api.get('/reviews/admin/all', { params });
+    return response.data;
   },
 
-  // Get user's review for a movie
-  getUserReview: (movieId) => {
-    return api.get(`/reviews/movie/${movieId}/user`);
+  getReviewStats: async () => {
+    const response = await api.get('/reviews/admin/stats');
+    return response.data;
   },
 
-  // Create a review
-  createReview: (movieId, data) => {
-    return api.post(`/reviews/movie/${movieId}`, data);
+  deleteReview: async (id) => {
+    const response = await api.delete(`/reviews/admin/${id}`);
+    return response.data;
   },
 
-  // Update a review
-  updateReview: (reviewId, data) => {
-    return api.put(`/reviews/${reviewId}`, data);
-  },
-
-  // Delete a review
-  deleteReview: (reviewId) => {
-    return api.delete(`/reviews/${reviewId}`);
-  },
-
-  // Toggle helpful
-  toggleHelpful: (reviewId) => {
-    return api.post(`/reviews/${reviewId}/helpful`);
+  // Public endpoints
+  getMovieReviews: async (movieId, params) => {
+    const response = await api.get(`/reviews/movie/${movieId}`, { params });
+    return response.data;
   }
 };

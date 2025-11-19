@@ -54,4 +54,24 @@ export const userService = {
   updatePreferences: (data) => {
     return api.put('/users/preferences', data);
   },
+
+  // Admin: Get all users
+  getAllUsers: (params = {}) => {
+    return api.get('/users/admin/all', { params });
+  },
+
+  // Admin: Get user details
+  getUserDetails: (userId) => {
+    return api.get(`/users/admin/${userId}`);
+  },
+
+  // Admin: Update user role
+  updateUserRole: (userId, role) => {
+    return api.put(`/users/admin/${userId}/role`, { role });
+  },
+
+  // Admin: Toggle user active status
+  toggleUserActive: (userId) => {
+    return api.put(`/users/admin/${userId}/toggle-active`);
+  },
 };

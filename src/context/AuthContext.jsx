@@ -44,11 +44,14 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       console.error('Error loading user:', error);
-      // Don't logout immediately, keep localStorage user
-      // Only logout if token is invalid (401)
-      if (error.response?.status === 401) {
-        logout();
+      // If token is invalid (401 or 403), logout completely
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+        setToken(null);
       }
+      // For other errors (network, 500, etc), keep the cached user from localStorage
     } finally {
       setLoading(false);
     }

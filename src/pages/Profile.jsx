@@ -14,7 +14,7 @@ import {
 } from 'react-icons/fa';
 
 function Profile() {
-  const { user, logout, updateUser } = useAuth();
+  const { user, logout, updateUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('info');
@@ -36,10 +36,13 @@ function Profile() {
   });
 
   useEffect(() => {
+    // Đợi auth loading xong
+    if (authLoading) return;
+
     if (!user) {
       navigate('/login');
     }
-  }, [user, navigate]);
+  }, [user, navigate, authLoading]);
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });

@@ -7,6 +7,8 @@ import {
   VideoCameraOutlined,
   UserOutlined,
   StarOutlined,
+  MessageOutlined,
+  TagsOutlined,
   SettingOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
@@ -15,17 +17,25 @@ import {
 } from '@ant-design/icons';
 import Dashboard from './admin/Dashboard';
 import Movies from './admin/Movies';
+import Users from './admin/Users';
+import Reviews from './admin/Reviews';
+import Comments from './admin/Comments';
+import Genres from './admin/Genres';
+import Settings from './admin/Settings';
 import 'antd/dist/reset.css';
 
 const { Header, Sider, Content } = Layout;
 
 function Admin() {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, loading, logout } = useAuth();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKey, setSelectedKey] = useState('dashboard');
 
   useEffect(() => {
+    // Đợi loading xong mới check authentication
+    if (loading) return;
+
     if (!isAuthenticated) {
       navigate('/login');
       return;
@@ -34,8 +44,23 @@ function Admin() {
     if (user?.role !== 'admin') {
       navigate('/');
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, user, navigate, loading]);
 
+  // Hiển thị loading khi đang check auth
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh' 
+      }}>
+        <div>Đang tải...</div>
+      </div>
+    );
+  }
+
+  // Không hiển thị gì nếu chưa đăng nhập hoặc không phải admin
   if (!user || user.role !== 'admin') {
     return null;
   }
@@ -60,6 +85,16 @@ function Admin() {
       key: 'reviews',
       icon: <StarOutlined />,
       label: 'Quản lý đánh giá'
+    },
+    {
+      key: 'comments',
+      icon: <MessageOutlined />,
+      label: 'Quản lý bình luận'
+    },
+    {
+      key: 'genres',
+      icon: <TagsOutlined />,
+      label: 'Quản lý thể loại'
     },
     {
       key: 'settings',
@@ -93,11 +128,15 @@ function Admin() {
       case 'movies':
         return <Movies />;
       case 'users':
-        return <div>Quản lý người dùng - Đang phát triển</div>;
+        return <Users />;
       case 'reviews':
-        return <div>Quản lý đánh giá - Đang phát triển</div>;
+        return <Reviews />;
+      case 'comments':
+        return <Comments />;
+      case 'genres':
+        return <Genres />;
       case 'settings':
-        return <div>Cài đặt - Đang phát triển</div>;
+        return <Settings />;
       default:
         return <Dashboard />;
     }

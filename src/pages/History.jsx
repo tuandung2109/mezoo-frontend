@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fa';
 
 function History() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,12 +20,15 @@ function History() {
   const itemsPerPage = 10;
 
   useEffect(() => {
+    // Đợi auth loading xong
+    if (authLoading) return;
+
     if (user) {
       fetchHistory();
     } else {
       navigate('/login');
     }
-  }, [user, navigate]);
+  }, [user, navigate, authLoading]);
 
   const fetchHistory = async () => {
     setLoading(true);

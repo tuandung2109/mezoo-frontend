@@ -21,12 +21,12 @@ function Home() {
     try {
       const [moviesData, genresData] = await Promise.all([
         movieService.getMovies({ limit: 50, sort: 'rating' }),
-        genreService.getAllGenres()
+        genreService.getGenres()
       ]);
       
       // movieService.getMovies returns { movies, total, page, totalPages }
       const allMovies = moviesData.movies || [];
-      const allGenres = genresData || [];
+      const allGenres = genresData.data || [];
       
       setMovies(allMovies);
       setGenres(allGenres);
