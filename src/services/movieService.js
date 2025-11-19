@@ -36,4 +36,22 @@ export const movieService = {
     const response = await api.get('/movies', { params });
     return response.data;
   },
+
+  // Create movie (Admin)
+  createMovie: async (data) => {
+    const response = await api.post('/movies', data);
+    return response.data;
+  },
+
+  // Update movie (Admin)
+  updateMovie: async (id, data) => {
+    const response = await api.put(`/movies/${id}`, data);
+    return response.data;
+  },
+
+  // Delete movie (Admin)
+  deleteMovie: async (id) => {
+    const response = await api.delete(`/movies/${id}`);
+    return response.data;
+  },
 };

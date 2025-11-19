@@ -1,13 +1,29 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { FaChartLine, FaFilm, FaUsers, FaStar, FaCog } from 'react-icons/fa';
+import { Layout, Menu, Button, Avatar, Dropdown } from 'antd';
+import {
+  DashboardOutlined,
+  VideoCameraOutlined,
+  UserOutlined,
+  StarOutlined,
+  SettingOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  HomeOutlined
+} from '@ant-design/icons';
+import Dashboard from './admin/Dashboard';
+import Movies from './admin/Movies';
+import 'antd/dist/reset.css';
+
+const { Header, Sider, Content } = Layout;
 
 function Admin() {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
+  const [selectedKey, setSelectedKey] = useState('dashboard');
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -15,7 +31,6 @@ function Admin() {
       return;
     }
 
-    // Check if user is admin
     if (user?.role !== 'admin') {
       navigate('/');
     }
@@ -25,89 +40,146 @@ function Admin() {
     return null;
   }
 
+  const menuItems = [
+    {
+      key: 'dashboard',
+      icon: <DashboardOutlined />,
+      label: 'Dashboard'
+    },
+    {
+      key: 'movies',
+      icon: <VideoCameraOutlined />,
+      label: 'Quản lý phim'
+    },
+    {
+      key: 'users',
+      icon: <UserOutlined />,
+      label: 'Quản lý người dùng'
+    },
+    {
+      key: 'reviews',
+      icon: <StarOutlined />,
+      label: 'Quản lý đánh giá'
+    },
+    {
+      key: 'settings',
+      icon: <SettingOutlined />,
+      label: 'Cài đặt'
+    }
+  ];
+
+  const userMenuItems = [
+    {
+      key: 'back-to-site',
+      icon: <HomeOutlined />,
+      label: 'Về trang chủ',
+      onClick: () => navigate('/')
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: 'Đăng xuất',
+      onClick: () => {
+        logout();
+        navigate('/');
+      }
+    }
+  ];
+
+  const renderContent = () => {
+    switch (selectedKey) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'movies':
+        return <Movies />;
+      case 'users':
+        return <div>Quản lý người dùng - Đang phát triển</div>;
+      case 'reviews':
+        return <div>Quản lý đánh giá - Đang phát triển</div>;
+      case 'settings':
+        return <div>Cài đặt - Đang phát triển</div>;
+      default:
+        return <Dashboard />;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
-      <Navbar />
-
-      <div className="pt-20 pb-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="mb-12 animate-fade-in">
-            <div className="flex items-center space-x-4 mb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-netflix-red to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-netflix-red/50">
-                <FaCog className="text-white text-3xl" />
-              </div>
-              <div>
-                <h1 className="text-5xl md:text-6xl font-bold text-white">
-                  Quản trị hệ thống
-                </h1>
-                <p className="text-gray-400 text-lg mt-2">
-                  Chào mừng, {user.fullName || user.username}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">Tổng phim</p>
-                  <p className="text-white text-4xl font-bold">--</p>
-                </div>
-                <FaFilm className="text-blue-500 text-4xl" />
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">Người dùng</p>
-                  <p className="text-white text-4xl font-bold">--</p>
-                </div>
-                <FaUsers className="text-green-500 text-4xl" />
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border border-yellow-500/30 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">Đánh giá</p>
-                  <p className="text-white text-4xl font-bold">--</p>
-                </div>
-                <FaStar className="text-yellow-500 text-4xl" />
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">Lượt xem</p>
-                  <p className="text-white text-4xl font-bold">--</p>
-                </div>
-                <FaChartLine className="text-purple-500 text-4xl" />
-              </div>
-            </div>
-          </div>
-
-          {/* Admin Sections */}
-          <div className="text-center py-20">
-            <div className="w-32 h-32 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
-              <FaCog className="text-gray-600 text-6xl animate-spin-slow" />
-            </div>
-            <h2 className="text-white text-3xl font-bold mb-4">
-              Trang quản trị đang được xây dựng
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Các tính năng quản lý sẽ được thêm vào sớm
-            </p>
-          </div>
+    <Layout style={{ minHeight: '100vh' }}>
+      <Sider 
+        trigger={null} 
+        collapsible 
+        collapsed={collapsed}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          bottom: 0
+        }}
+      >
+        <div style={{
+          height: 64,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#E50914',
+          fontSize: collapsed ? 20 : 24,
+          fontWeight: 'bold'
+        }}>
+          {collapsed ? 'M' : 'MOZI ADMIN'}
         </div>
-      </div>
-
-      <Footer />
-    </div>
+        <Menu
+          theme="dark"
+          mode="inline"
+          selectedKeys={[selectedKey]}
+          items={menuItems}
+          onClick={({ key }) => setSelectedKey(key)}
+        />
+      </Sider>
+      
+      <Layout style={{ marginLeft: collapsed ? 80 : 200, transition: 'all 0.2s' }}>
+        <Header style={{
+          padding: '0 24px',
+          background: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+        }}>
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{ fontSize: 16 }}
+          />
+          
+          <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+            <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+              <Avatar 
+                src={user.avatar} 
+                icon={<UserOutlined />}
+                style={{ marginRight: 8 }}
+              />
+              <span>{user.fullName || user.username}</span>
+            </div>
+          </Dropdown>
+        </Header>
+        
+        <Content style={{
+          margin: '24px',
+          padding: 24,
+          minHeight: 280,
+          background: '#fff',
+          borderRadius: 8
+        }}>
+          {renderContent()}
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
 
