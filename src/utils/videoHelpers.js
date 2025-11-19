@@ -19,7 +19,7 @@ export const getYouTubeEmbedUrl = (url) => {
     return url;
   }
   
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0&fs=1&iv_load_policy=3&disablekb=0&playsinline=1`;
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`;
 };
 
 // Get video type

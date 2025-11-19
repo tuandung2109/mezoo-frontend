@@ -53,10 +53,14 @@ function Navbar() {
                 onMouseLeave={() => setShowDropdown(false)}
               >
                 <div className="flex items-center space-x-2 cursor-pointer group">
-                  <div className="w-8 h-8 bg-netflix-red rounded flex items-center justify-center">
-                    <span className="text-sm font-bold">
-                      {user?.username?.charAt(0).toUpperCase() || 'U'}
-                    </span>
+                  <div className="w-8 h-8 bg-netflix-red rounded-full flex items-center justify-center overflow-hidden">
+                    {user?.avatar ? (
+                      <img src={user.avatar} alt={user.fullName} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-sm font-bold">
+                        {user?.username?.charAt(0).toUpperCase() || 'U'}
+                      </span>
+                    )}
                   </div>
                   <FaCaretDown className="group-hover:rotate-180 transition-transform" />
                 </div>

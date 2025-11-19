@@ -17,6 +17,17 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
+    // Load user from localStorage first (instant)
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (e) {
+        console.error('Error parsing stored user:', e);
+      }
+    }
+
+    // Then load from API if token exists
     if (token) {
       loadUser();
     } else {
@@ -27,10 +38,17 @@ export const AuthProvider = ({ children }) => {
   const loadUser = async () => {
     try {
       const response = await authService.getCurrentUser();
-      setUser(response.data.data);
+      const userData = response.data.data;
+      setUser(userData);
+      // Update localStorage with fresh data
+      localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       console.error('Error loading user:', error);
-      logout();
+      // Don't logout immediately, keep localStorage user
+      // Only logout if token is invalid (401)
+      if (error.response?.status === 401) {
+        logout();
+      }
     } finally {
       setLoading(false);
     }
@@ -82,13 +100,19 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
   };
 
+  const updateUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
   const value = {
     user,
     loading,
     isAuthenticated: !!user,
     login,
     register,
-    logout
+    logout,
+    updateUser
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
