@@ -52,13 +52,25 @@ function Home() {
       <HeroBanner movie={featuredMovie} />
       
       <div className="relative -mt-32 z-10 space-y-8 md:space-y-12 pb-20">
-        <MovieRow title="Xu hướng hiện nay" movies={movies.slice(0, 10)} />
-        
+        {/* Trending - Latest movies */}
         <MovieRow 
-          title="Xếp hạng cao" 
+          title="Xu hướng hiện nay" 
+          movies={[...movies].sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate)).slice(0, 10)} 
+        />
+        
+        {/* Top Rated - Highest rating */}
+        <MovieRow 
+          title="Xếp hạng cao nhất" 
           movies={[...movies].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 10)} 
         />
         
+        {/* Popular - Most views */}
+        <MovieRow 
+          title="Phổ biến" 
+          movies={[...movies].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 10)} 
+        />
+        
+        {/* Genre rows */}
         {genres.slice(0, 5).map(genre => {
           const genreMovies = movies.filter(m => 
             m.genres && (

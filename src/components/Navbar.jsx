@@ -21,18 +21,23 @@ function Navbar() {
 
   return (
     <nav 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-netflix-black' : 'bg-gradient-to-b from-black to-transparent'
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        scrolled 
+          ? 'bg-black/80 backdrop-blur-md shadow-lg' 
+          : 'bg-gradient-to-b from-black/80 to-transparent'
       }`}
     >
       <div className="flex items-center justify-between px-4 md:px-8 py-4">
         <div className="flex items-center space-x-8">
-          <h1 className="text-netflix-red text-3xl md:text-4xl font-bold cursor-pointer">
+          <h1 
+            onClick={() => navigate('/')}
+            className="text-netflix-red text-3xl md:text-4xl font-bold cursor-pointer hover:scale-110 transition-transform"
+          >
             MOZI
           </h1>
           <div className="hidden md:flex space-x-6 text-sm">
-            <a href="/" className="hover:text-gray-300 transition">Trang chủ</a>
-            <a href="/movies" className="hover:text-gray-300 transition">Phim</a>
+            <button onClick={() => navigate('/')} className="hover:text-gray-300 transition">Trang chủ</button>
+            <button onClick={() => navigate('/search')} className="hover:text-gray-300 transition">Phim</button>
             <a href="/series" className="hover:text-gray-300 transition">Phim bộ</a>
             <a href="/new" className="hover:text-gray-300 transition">Mới & Phổ biến</a>
             <a href="/my-list" className="hover:text-gray-300 transition">Danh sách của tôi</a>
