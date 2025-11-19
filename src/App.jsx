@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import Movies from './pages/Movies';
 import Trending from './pages/Trending';
 import MyList from './pages/MyList';
+import History from './pages/History';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/movies" element={<Movies />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/my-list" element={<MyList />} />
+          <Route path="/history" element={<History />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

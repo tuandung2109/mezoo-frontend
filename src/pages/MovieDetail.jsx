@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import VideoPlayer from '../components/VideoPlayer';
 import MovieCard from '../components/MovieCard';
 import Toast from '../components/Toast';
+import Reviews from '../components/Reviews';
 import { useAuth } from '../context/AuthContext';
 import { formatDate, formatRuntime } from '../utils/helpers';
 
@@ -390,6 +391,11 @@ function MovieDetail() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Reviews Section */}
+        <div>
+          <Reviews movieId={id} />
         </div>
 
         {/* Similar Movies */}

@@ -42,6 +42,14 @@ export const userService = {
     return api.post(`/users/history/${movieId}`, data);
   },
 
+  clearHistory: () => {
+    return api.delete('/users/history');
+  },
+
+  removeFromHistory: (movieId) => {
+    return api.delete(`/users/history/${movieId}`);
+  },
+
   // Preferences
   updatePreferences: (data) => {
     return api.put('/users/preferences', data);

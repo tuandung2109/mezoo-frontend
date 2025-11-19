@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart } from 'react-icons/fa';
+import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart, FaHistory } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SearchBar from './SearchBar';
 
@@ -40,6 +40,7 @@ function Navbar() {
             <button onClick={() => navigate('/movies')} className="hover:text-gray-300 transition">Phim</button>
             <button onClick={() => navigate('/trending')} className="hover:text-gray-300 transition">Mới & Phổ biến</button>
             <button onClick={() => navigate('/my-list')} className="hover:text-gray-300 transition">Danh sách của tôi</button>
+            <button onClick={() => navigate('/history')} className="hover:text-gray-300 transition">Lịch sử</button>
           </div>
         </div>
         
@@ -106,6 +107,13 @@ function Navbar() {
                       >
                         <FaHeart size={14} />
                         <span>Danh sách của tôi</span>
+                      </button>
+                      <button 
+                        onClick={() => { navigate('/history'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                      >
+                        <FaHistory size={14} />
+                        <span>Lịch sử xem</span>
                       </button>
                     </div>
 

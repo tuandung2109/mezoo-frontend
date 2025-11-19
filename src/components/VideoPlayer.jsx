@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { FaPlay, FaPause, FaExpand, FaCompress, FaVolumeUp, FaVolumeMute, FaTimes } from 'react-icons/fa';
 import { isYouTubeUrl, getYouTubeEmbedUrl, getVideoType } from '../utils/videoHelpers';
+import { userService } from '../services/userService';
+import { useAuth } from '../context/AuthContext';
 
 function VideoPlayer({ movie, onClose }) {
+  const { isAuthenticated } = useAuth();
   const videoRef = useRef(null);
   const containerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,6 +17,7 @@ function VideoPlayer({ movie, onClose }) {
   const [selectedQuality, setSelectedQuality] = useState(0);
   const [showControls, setShowControls] = useState(true);
   const [videoType, setVideoType] = useState('direct');
+  const historyUpdateInterval = useRef(null);
 
   // Check video type on mount and quality change
   useEffect(() => {
@@ -102,6 +106,55 @@ function VideoPlayer({ movie, onClose }) {
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  // Track watch history
+  useEffect(() => {
+    if (!isAuthenticated || !movie._id) return;
+
+    // Add to history when video starts
+    const addToHistory = async () => {
+      try {
+        await userService.addToHistory(movie._id, {
+          progress: 0,
+          completed: false
+        });
+      } catch (error) {
+        console.error('Error adding to history:', error);
+      }
+    };
+
+    addToHistory();
+
+    // Update progress every 10 seconds
+    historyUpdateInterval.current = setInterval(() => {
+      if (duration > 0 && currentTime > 0) {
+        const progress = (currentTime / duration) * 100;
+        const completed = progress >= 90;
+
+        userService.addToHistory(movie._id, {
+          progress: Math.round(progress),
+          completed
+        }).catch(err => console.error('Error updating history:', err));
+      }
+    }, 10000);
+
+    return () => {
+      if (historyUpdateInterval.current) {
+        clearInterval(historyUpdateInterval.current);
+      }
+      
+      // Final update on unmount
+      if (duration > 0 && currentTime > 0) {
+        const progress = (currentTime / duration) * 100;
+        const completed = progress >= 90;
+        
+        userService.addToHistory(movie._id, {
+          progress: Math.round(progress),
+          completed
+        }).catch(err => console.error('Error updating history:', err));
+      }
+    };
+  }, [isAuthenticated, movie._id, currentTime, duration]);
 
   // Close on ESC key
   useEffect(() => {
