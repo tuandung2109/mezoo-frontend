@@ -22,7 +22,9 @@ frontend/
 │   │   ├── HeroBanner.jsx
 │   │   ├── MovieRow.jsx
 │   │   ├── MovieCard.jsx
-│   │   └── Loading.jsx
+│   │   ├── Loading.jsx
+│   │   ├── Chatbot.jsx     # 🤖 AI Chatbot
+│   │   └── Chatbot.css
 │   ├── pages/              # Page components
 │   │   └── Home.jsx
 │   ├── services/           # API services
@@ -97,6 +99,12 @@ npm run preview
 ✅ API integration với backend
 ✅ Loading states
 ✅ Navbar với scroll effect
+✅ **AI Chatbot với Google Gemini** 🤖
+  - Gợi ý phim thông minh
+  - Tư vấn gói đăng ký
+  - Hướng dẫn sử dụng tính năng
+  - Trả lời câu hỏi về phim
+  - Cá nhân hóa theo sở thích
 
 ### Sắp làm
 🔜 Movie detail page
@@ -127,11 +135,19 @@ npm run preview
 
 Backend API: `http://localhost:5000/api`
 
+### Movies & Auth
 - `GET /movies` - Danh sách phim
 - `GET /movies/:id` - Chi tiết phim
 - `GET /genres` - Danh sách thể loại
 - `POST /auth/login` - Đăng nhập
 - `POST /auth/register` - Đăng ký
+
+### Chatbot 🤖
+- `POST /chat` - Gửi tin nhắn
+- `GET /chat/history` - Lịch sử chat
+- `DELETE /chat/history` - Xóa lịch sử
+- `GET /chat/sessions` - Danh sách sessions
+- `GET /chat/suggestions` - Gợi ý nhanh
 
 ## 📝 Code Style
 
@@ -146,6 +162,72 @@ Backend API: `http://localhost:5000/api`
 2. Commit changes
 3. Push to branch
 4. Create Pull Request
+
+## 🤖 AI Chatbot
+
+### Tính năng
+Chatbot AI thông minh sử dụng **Google Gemini** để:
+- 🎬 Gợi ý phim phù hợp với sở thích
+- 🔍 Tìm kiếm phim theo thể loại, năm, rating
+- 💡 Trả lời câu hỏi về phim, diễn viên, đạo diễn
+- 🎯 Tư vấn gói đăng ký (Free, Basic, Premium, VIP)
+- ✨ Hướng dẫn sử dụng tính năng Mozi
+- 📊 Cá nhân hóa dựa trên lịch sử xem
+
+### Cách sử dụng
+1. Đăng nhập vào Mozi
+2. Click nút chat 💬 ở góc dưới phải
+3. Gõ câu hỏi và nhấn Enter
+4. Bot sẽ trả lời trong 1-3 giây
+
+### Ví dụ câu hỏi
+```
+- "Gợi ý phim hành động hay cho tôi"
+- "Tìm phim kinh dị Hàn Quốc"
+- "Avengers Endgame nói về gì?"
+- "Gói Premium có gì?"
+- "Làm sao thêm phim vào yêu thích?"
+- "Tôi nên nâng cấp lên gói nào?"
+```
+
+### UI Features
+- ✨ Beautiful gradient design
+- 🎭 Smooth animations
+- 📱 Fully responsive
+- 🌙 Dark mode support
+- 🎬 Movie cards với poster
+- ⭐ Rating display
+- 💡 Quick reply suggestions
+- ⏳ Typing indicator
+- 📜 Auto-scroll
+- 🗑️ Clear history
+
+### Tích hợp vào App
+```jsx
+// App.jsx
+import Chatbot from './components/Chatbot';
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        {/* ... existing routes ... */}
+        
+        {/* Thêm Chatbot */}
+        <Chatbot />
+      </Router>
+    </AuthProvider>
+  );
+}
+```
+
+### Documentation
+- [CHATBOT_README.md](../../CHATBOT_README.md) - Tổng quan đầy đủ
+- [CHATBOT_QUICKSTART.md](../../CHATBOT_QUICKSTART.md) - Hướng dẫn nhanh
+- [CHATBOT_CAPABILITIES.md](../../CHATBOT_CAPABILITIES.md) - Khả năng chatbot
+- [CHATBOT_EXAMPLES.md](../../CHATBOT_EXAMPLES.md) - Ví dụ thực tế
+
+---
 
 ## 📄 License
 

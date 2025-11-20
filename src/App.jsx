@@ -13,6 +13,7 @@ import History from './pages/History';
 import Subscription from './pages/Subscription';
 import Stats from './pages/Stats';
 import Admin from './pages/Admin';
+import Chatbot from './components/Chatbot';
 import './App.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
+        <Chatbot />
       </Router>
     </AuthProvider>
   );
