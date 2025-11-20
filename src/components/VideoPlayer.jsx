@@ -188,7 +188,7 @@ function VideoPlayer({ movie, onClose }) {
     const embedUrl = getYouTubeEmbedUrl(movie.videos[selectedQuality].url);
     
     return (
-      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+      <div className="video-player-active fixed inset-0 bg-black z-50 flex items-center justify-center">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -212,7 +212,7 @@ function VideoPlayer({ movie, onClose }) {
 
   // Render Direct MP4 player
   return (
-    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+    <div className="video-player-active fixed inset-0 bg-black z-50 flex items-center justify-center">
       {/* Close Button */}
       <button
         onClick={onClose}
