@@ -371,6 +371,7 @@ const Genres = () => {
               type="primary" 
               icon={<PlusOutlined />}
               onClick={handleCreate}
+              style={{ backgroundColor: '#1890ff', borderColor: '#1890ff' }}
             >
               Thêm thể loại
             </Button>

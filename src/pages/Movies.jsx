@@ -51,10 +51,11 @@ function Movies() {
 
   const fetchGenres = async () => {
     try {
-      const data = await genreService.getAllGenres();
-      setGenres(data);
+      const data = await genreService.getGenres();
+      setGenres(data.data || []);
     } catch (error) {
       console.error('Error fetching genres:', error);
+      setGenres([]);
     }
   };
 

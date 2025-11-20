@@ -25,7 +25,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   LikeOutlined,
-  EditOutlined
+  EditOutlined,
+  EyeOutlined
 } from '@ant-design/icons';
 import { reviewService } from '../../services/reviewService';
 import dayjs from 'dayjs';
@@ -216,10 +217,17 @@ const Reviews = () => {
     {
       title: 'Thao tác',
       key: 'action',
-      width: 100,
+      width: 120,
       fixed: 'right',
       render: (_, record) => (
         <Space>
+          <Tooltip title="Xem chi tiết">
+            <Button 
+              type="text" 
+              icon={<EyeOutlined />}
+              onClick={() => showReviewDetail(record)}
+            />
+          </Tooltip>
           <Popconfirm
             title="Xóa đánh giá"
             description="Bạn có chắc muốn xóa đánh giá này?"

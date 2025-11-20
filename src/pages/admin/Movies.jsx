@@ -234,6 +234,7 @@ function Movies() {
           icon={<PlusOutlined />}
           onClick={handleAdd}
           size="large"
+          style={{ backgroundColor: '#1890ff', borderColor: '#1890ff' }}
         >
           Thêm phim mới
         </Button>

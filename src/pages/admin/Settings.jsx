@@ -189,7 +189,13 @@ const Settings = () => {
             <Divider />
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" icon={<SaveOutlined />} loading={loading}>
+              <Button 
+                type="primary" 
+                htmlType="submit" 
+                icon={<SaveOutlined />} 
+                loading={loading}
+                style={{ backgroundColor: '#1890ff', borderColor: '#1890ff' }}
+              >
                 Lưu cài đặt
               </Button>
             </Form.Item>
@@ -290,7 +296,13 @@ const Settings = () => {
 
             <Form.Item>
               <Space>
-                <Button type="primary" htmlType="submit" icon={<SaveOutlined />} loading={loading}>
+                <Button 
+                  type="primary" 
+                  htmlType="submit" 
+                  icon={<SaveOutlined />} 
+                  loading={loading}
+                  style={{ backgroundColor: '#1890ff', borderColor: '#1890ff' }}
+                >
                   Lưu cài đặt
                 </Button>
                 <Button>
@@ -369,7 +381,13 @@ const Settings = () => {
             <Divider />
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" icon={<SaveOutlined />} loading={loading}>
+              <Button 
+                type="primary" 
+                htmlType="submit" 
+                icon={<SaveOutlined />} 
+                loading={loading}
+                style={{ backgroundColor: '#1890ff', borderColor: '#1890ff' }}
+              >
                 Lưu cài đặt
               </Button>
             </Form.Item>
@@ -446,7 +464,13 @@ const Settings = () => {
             <Divider />
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" icon={<SaveOutlined />} loading={loading}>
+              <Button 
+                type="primary" 
+                htmlType="submit" 
+                icon={<SaveOutlined />} 
+                loading={loading}
+                style={{ backgroundColor: '#1890ff', borderColor: '#1890ff' }}
+              >
                 Lưu cài đặt
               </Button>
             </Form.Item>

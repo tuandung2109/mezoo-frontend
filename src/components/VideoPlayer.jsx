@@ -183,12 +183,13 @@ function VideoPlayer({ movie, onClose }) {
     );
   }
 
-  // Render YouTube player
+  // Render YouTube player - Simple version
   if (videoType === 'youtube') {
     const embedUrl = getYouTubeEmbedUrl(movie.videos[selectedQuality].url);
     
     return (
       <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 z-50 w-10 h-10 bg-black/80 hover:bg-black rounded-full flex items-center justify-center text-white transition"
@@ -196,35 +197,15 @@ function VideoPlayer({ movie, onClose }) {
           <FaTimes size={20} />
         </button>
 
-        <div ref={containerRef} className="relative w-full h-full flex items-center justify-center">
-          <iframe
-            className="w-full h-full md:w-4/5 md:h-4/5"
-            src={embedUrl}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-          
-          {/* Quality Selector for YouTube */}
-          {movie.videos.length > 1 && (
-            <div className="absolute bottom-4 right-4 flex space-x-2 z-50">
-              {movie.videos.map((video, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedQuality(index)}
-                  className={`px-3 py-2 text-sm rounded ${
-                    selectedQuality === index
-                      ? 'bg-netflix-red text-white'
-                      : 'bg-gray-700 text-white hover:bg-gray-600'
-                  }`}
-                >
-                  {video.quality}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        {/* YouTube iframe - centered with padding */}
+        <iframe
+          className="w-full h-full md:w-4/5 md:h-4/5"
+          src={embedUrl}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </div>
     );
   }
