@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { welcomeUser } from '../utils/textToSpeech';
 
 function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -28,6 +29,13 @@ function Login() {
     const result = await login(formData);
     
     if (result.success) {
+      // Get user info from result or context
+      const userName = result.user?.fullName || result.user?.username || 'bạn';
+      
+      // Welcome speech
+      welcomeUser(userName);
+      
+      // Navigate to home
       navigate('/');
     } else {
       setError(result.message);

@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { movieService } from '../services/movieService';
 import { genreService } from '../services/genreService';
+import { userService } from '../services/userService';
+import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import Toast from '../components/Toast';
+import MovieCard from '../components/MovieCard';
 import { FaStar, FaCalendar, FaFilter, FaTimes, FaPlay } from 'react-icons/fa';
 
 function Movies() {

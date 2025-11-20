@@ -23,6 +23,19 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.dropdown-container') && !event.target.closest('.notification-container')) {
+        setShowDropdown(false);
+        setShowNotifications(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   useEffect(() => {
     if (isAuthenticated) {
       fetchNotifications();
@@ -83,18 +96,24 @@ function Navbar() {
     >
       <div className="flex items-center justify-between px-4 md:px-8 py-4">
         <div className="flex items-center space-x-8">
-          <h1 
+          <div 
             onClick={() => navigate('/')}
-            className="text-netflix-red text-3xl md:text-4xl font-bold cursor-pointer hover:scale-110 transition-transform"
+            className="text-netflix-red text-3xl md:text-4xl font-black cursor-pointer hover:scale-105 transition-all flex-shrink-0 flex items-center"
+            style={{ 
+              fontFamily: '"Bebas Neue", "Impact", "Arial Black", sans-serif',
+              textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(229,9,20,0.5)',
+              letterSpacing: '0.05em',
+              lineHeight: '1'
+            }}
           >
             MOZI
-          </h1>
-          <div className="hidden md:flex space-x-6 text-sm">
-            <button onClick={() => navigate('/')} className="hover:text-gray-300 transition">Trang chủ</button>
-            <button onClick={() => navigate('/movies')} className="hover:text-gray-300 transition">Phim</button>
-            <button onClick={() => navigate('/trending')} className="hover:text-gray-300 transition">Mới & Phổ biến</button>
-            <button onClick={() => navigate('/my-list')} className="hover:text-gray-300 transition">Danh sách của tôi</button>
-            <button onClick={() => navigate('/history')} className="hover:text-gray-300 transition">Lịch sử</button>
+          </div>
+          <div className="hidden md:flex items-center space-x-6 text-base font-medium">
+            <button onClick={() => navigate('/')} className="hover:text-gray-300 transition whitespace-nowrap">Trang chủ</button>
+            <button onClick={() => navigate('/movies')} className="hover:text-gray-300 transition whitespace-nowrap">Phim</button>
+            <button onClick={() => navigate('/trending')} className="hover:text-gray-300 transition whitespace-nowrap">Mới & Phổ biến</button>
+            <button onClick={() => navigate('/my-list')} className="hover:text-gray-300 transition whitespace-nowrap">Danh sách của tôi</button>
+            <button onClick={() => navigate('/history')} className="hover:text-gray-300 transition whitespace-nowrap">Lịch sử</button>
             {user?.role === 'admin' && (
               <button 
                 onClick={() => navigate('/admin')} 
@@ -113,7 +132,7 @@ function Navbar() {
           {isAuthenticated ? (
             <>
               {/* Notifications */}
-              <div className="relative">
+              <div className="relative notification-container">
                 <button 
                   onClick={() => setShowNotifications(!showNotifications)}
                   className="hover:text-gray-300 transition relative"
@@ -180,12 +199,11 @@ function Navbar() {
                   </div>
                 )}
               </div>
-              <div 
-                className="relative"
-                onMouseEnter={() => setShowDropdown(true)}
-                onMouseLeave={() => setShowDropdown(false)}
-              >
-                <div className="flex items-center space-x-2 cursor-pointer group">
+              <div className="relative dropdown-container">
+                <div 
+                  className="flex items-center space-x-2 cursor-pointer group"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                >
                   <div className="w-8 h-8 bg-netflix-red rounded-full flex items-center justify-center overflow-hidden">
                     {user?.avatar ? (
                       <img src={user.avatar} alt={user.fullName} className="w-full h-full object-cover" />
