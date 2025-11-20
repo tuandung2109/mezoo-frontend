@@ -194,7 +194,7 @@ VITE_API_URL=http://localhost:5000/api
 │  Bot: Đây là một số phim hay...    │
 │  ┌─────────────────────────────┐   │
 │  │ [Poster] Movie Title        │   │
-│  │          ⭐ 8.5  2024       │   │
+│  │          ⭐ 8.5  2025       │   │
 │  │          Action, Thriller   │   │
 │  └─────────────────────────────┘   │
 │                                     │
