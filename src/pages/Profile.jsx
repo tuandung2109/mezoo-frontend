@@ -8,10 +8,11 @@ import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import ImageUpload from '../components/ImageUpload';
 import Toast from '../components/Toast';
+import StatsActivityChart from '../components/StatsActivityChart';
 import { 
   FaUser, FaLock, FaEdit, FaSave, FaTimes, 
-  FaHistory, FaHeart, FaCrown, FaCalendar, FaStar, FaFilm,
-  FaEye, FaClock, FaFire, FaChartLine
+  FaHeart, FaCrown, FaStar,
+  FaEye, FaClock, FaChartLine
 } from 'react-icons/fa';
 
 function Profile() {
@@ -418,9 +419,17 @@ function Profile() {
             {/* Stats Tab */}
             {activeTab === 'stats' && (
               <div className="animate-fade-in">
-                <div className="mb-8">
-                  <h2 className="text-3xl font-bold text-white mb-2">Thống kê hoạt động</h2>
-                  <p className="text-gray-400">Xem tổng quan về hoạt động của bạn</p>
+                <div className="mb-8 flex items-center justify-between">
+                  <div>
+                    <h2 className="text-3xl font-bold text-white mb-2">Thống kê hoạt động</h2>
+                    <p className="text-gray-400">Xem tổng quan về hoạt động của bạn</p>
+                  </div>
+                  <button
+                    onClick={() => navigate('/stats')}
+                    className="bg-gradient-to-r from-netflix-red to-red-600 text-white px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-netflix-red/50 transition-all transform hover:scale-105 font-semibold"
+                  >
+                    Xem chi tiết
+                  </button>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -435,17 +444,8 @@ function Profile() {
                   ))}
                 </div>
 
-                {/* Activity Chart Placeholder */}
-                <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700">
-                  <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                    <FaFire className="text-orange-500 mr-2" />
-                    Hoạt động gần đây
-                  </h3>
-                  <div className="text-center py-12">
-                    <FaChartLine className="text-gray-600 text-6xl mx-auto mb-4" />
-                    <p className="text-gray-400">Biểu đồ hoạt động đang được phát triển</p>
-                  </div>
-                </div>
+                {/* Activity Chart - Now with real data */}
+                <StatsActivityChart userId={user._id} />
               </div>
             )}
 

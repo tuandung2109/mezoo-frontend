@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart, FaHistory, FaCrown, FaCog } from 'react-icons/fa';
+import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart, FaHistory, FaCrown, FaCog, FaChartLine } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SearchBar from './SearchBar';
 import { notificationService } from '../services/notificationService';
@@ -260,6 +260,13 @@ function Navbar() {
                       >
                         <FaHistory size={14} />
                         <span>Lịch sử xem</span>
+                      </button>
+                      <button 
+                        onClick={() => { navigate('/stats'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                      >
+                        <FaChartLine size={14} />
+                        <span>Thống kê</span>
                       </button>
                     </div>
 

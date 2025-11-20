@@ -74,4 +74,10 @@ export const userService = {
   toggleUserActive: (userId) => {
     return api.put(`/users/admin/${userId}/toggle-active`);
   },
+
+  // Get my stats
+  getMyStats: async () => {
+    const response = await api.get('/users/me/stats');
+    return response.data.data;
+  },
 };
