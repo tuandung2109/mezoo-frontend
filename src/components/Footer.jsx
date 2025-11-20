@@ -38,7 +38,7 @@ function Footer() {
         </div>
         <div className="text-center text-gray-400 pt-8 border-t border-gray-800">
           <p className="text-2xl font-bold text-netflix-red mb-2">MOZI</p>
-          <p className="text-sm">© 2024 Mozi Movie Streaming Platform. All rights reserved.</p>
+          <p className="text-sm">© 2025 Mozi Movie Streaming Platform — Created by tuandung2109.</p>
         </div>
       </div>
     </footer>

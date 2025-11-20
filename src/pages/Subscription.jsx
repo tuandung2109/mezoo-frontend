@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Toast from '../components/Toast';
 import { FaCheck, FaCrown, FaStar, FaRocket, FaGift } from 'react-icons/fa';
 
 function Subscription() {
+  useDocumentTitle('Gói dịch vụ');
   const { user, isAuthenticated, loading } = useAuth();
   const navigate = useNavigate();
   const [toast, setToast] = useState(null);

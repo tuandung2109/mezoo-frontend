@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { movieService } from '../services/movieService';
 import { genreService } from '../services/genreService';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import { FaStar, FaCalendar, FaSearch, FaFilter } from 'react-icons/fa';
 
 function Search() {
+  useDocumentTitle('Tìm kiếm');
   const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);

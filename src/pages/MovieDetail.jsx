@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FaStar, FaPlay, FaPlus, FaCheck, FaShare, FaHeart, FaTimes, FaCopy, FaFacebook, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import { movieService } from '../services/movieService';
 import { userService } from '../services/userService';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
@@ -18,6 +19,7 @@ function MovieDetail() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [movie, setMovie] = useState(null);
+  useDocumentTitle(movie?.title || 'Chi tiết phim');
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showPlayer, setShowPlayer] = useState(false);

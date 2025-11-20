@@ -4,6 +4,7 @@ import { movieService } from '../services/movieService';
 import { genreService } from '../services/genreService';
 import { userService } from '../services/userService';
 import { useAuth } from '../context/AuthContext';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
@@ -12,6 +13,7 @@ import MovieCard from '../components/MovieCard';
 import { FaStar, FaCalendar, FaFilter, FaTimes, FaPlay } from 'react-icons/fa';
 
 function Movies() {
+  useDocumentTitle('Tất cả phim');
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);

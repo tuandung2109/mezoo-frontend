@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    // Load user from localStorage first (instant)
+    // Load user from localStorage first 
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {

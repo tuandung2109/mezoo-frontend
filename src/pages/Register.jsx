@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { welcomeUser } from '../utils/textToSpeech';
 
 function Register() {
+  useDocumentTitle('Đăng ký');
   const navigate = useNavigate();
   const { register } = useAuth();
   const [formData, setFormData] = useState({

@@ -30,12 +30,12 @@ function Dashboard() {
 
   // Mock data for charts
   const viewsData = [
-    { date: '2024-01', views: 120 },
-    { date: '2024-02', views: 180 },
-    { date: '2024-03', views: 250 },
-    { date: '2024-04', views: 320 },
-    { date: '2024-05', views: 280 },
-    { date: '2024-06', views: 400 }
+    { date: '2025-01', views: 120 },
+    { date: '2025-02', views: 180 },
+    { date: '2025-03', views: 250 },
+    { date: '2025-04', views: 320 },
+    { date: '2025-05', views: 280 },
+    { date: '2025-06', views: 400 }
   ];
 
   const topMoviesData = [

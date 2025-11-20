@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { userService } from '../services/userService';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
@@ -11,6 +12,7 @@ import {
 } from 'react-icons/fa';
 
 function MyList() {
+  useDocumentTitle('Danh sách của tôi');
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('favorites'); // 'favorites' or 'watchlist'
   const [favorites, setFavorites] = useState([]);

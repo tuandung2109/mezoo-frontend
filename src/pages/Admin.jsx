@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { Layout, Menu, Button, Avatar, Dropdown } from 'antd';
 import {
   DashboardOutlined,
@@ -27,6 +28,7 @@ import 'antd/dist/reset.css';
 const { Header, Sider, Content } = Layout;
 
 function Admin() {
+  useDocumentTitle('Quản trị');
   const { user, isAuthenticated, loading, logout } = useAuth();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { movieService } from '../services/movieService';
 import { genreService } from '../services/genreService';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import Navbar from '../components/Navbar';
 import HeroBanner from '../components/HeroBanner';
 import MovieRow from '../components/MovieRow';
@@ -8,6 +9,7 @@ import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 
 function Home() {
+  useDocumentTitle('Trang chủ');
   const [movies, setMovies] = useState([]);
   const [featuredMovie, setFeaturedMovie] = useState(null);
   const [genres, setGenres] = useState([]);

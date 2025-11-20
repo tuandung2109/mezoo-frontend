@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { movieService } from '../services/movieService';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import { FaStar, FaFire, FaClock, FaEye, FaPlay, FaTrophy } from 'react-icons/fa';
 
 function Trending() {
+  useDocumentTitle('Mới & Phổ biến');
   const [activeTab, setActiveTab] = useState('new'); // 'new' or 'popular'
   const [newMovies, setNewMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
