@@ -30,12 +30,13 @@ function Reviews({ movieId }) {
 
   const fetchReviews = async () => {
     try {
-      const response = await reviewService.getMovieReviews(movieId, sortBy);
-      setReviews(response.data.data.reviews);
-      setAverageRating(response.data.data.averageRating);
+      const response = await reviewService.getMovieReviews(movieId, { sort: sortBy });
+      setReviews(response.data.reviews || []);
+      setAverageRating(response.data.averageRating || 0);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching reviews:', error);
+      setReviews([]);
       setLoading(false);
     }
   };
@@ -43,9 +44,10 @@ function Reviews({ movieId }) {
   const fetchUserReview = async () => {
     try {
       const response = await reviewService.getUserReview(movieId);
-      setUserReview(response.data.data);
+      setUserReview(response.data || null);
     } catch (error) {
       console.error('Error fetching user review:', error);
+      setUserReview(null);
     }
   };
 

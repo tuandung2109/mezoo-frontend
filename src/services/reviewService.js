@@ -21,5 +21,25 @@ export const reviewService = {
   getMovieReviews: async (movieId, params) => {
     const response = await api.get(`/reviews/movie/${movieId}`, { params });
     return response.data;
+  },
+
+  getUserReview: async (movieId) => {
+    const response = await api.get(`/reviews/movie/${movieId}/user`);
+    return response.data;
+  },
+
+  createReview: async (movieId, data) => {
+    const response = await api.post(`/reviews/movie/${movieId}`, data);
+    return response.data;
+  },
+
+  updateReview: async (reviewId, data) => {
+    const response = await api.put(`/reviews/${reviewId}`, data);
+    return response.data;
+  },
+
+  deleteUserReview: async (reviewId) => {
+    const response = await api.delete(`/reviews/${reviewId}`);
+    return response.data;
   }
 };

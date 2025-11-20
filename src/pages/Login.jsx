@@ -5,10 +5,10 @@ import { welcomeUser } from '../utils/textToSpeech';
 
 function Login() {
   const navigate = useNavigate();
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: 'dinhtuandung10a6@gmail.com',
+    password: '123456'
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { welcomeUser } from '../utils/textToSpeech';
 
 function Register() {
   const navigate = useNavigate();
@@ -36,6 +37,13 @@ function Register() {
     const result = await register(formData);
     
     if (result.success) {
+      // Get user name from result or form data
+      const userName = result.user?.fullName || formData.fullName || formData.username;
+      
+      // Welcome speech
+      welcomeUser(userName);
+      
+      // Navigate to home
       navigate('/');
     } else {
       setError(result.message);
