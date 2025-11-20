@@ -149,4 +149,4 @@ Backend API: `http://localhost:5000/api`
 
 ## 📄 License
 
-© 2024 Mozi Movie Streaming Platform
+© 2025 Mozi Movie Streaming Platform
