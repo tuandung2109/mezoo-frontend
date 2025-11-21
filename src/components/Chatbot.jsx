@@ -39,17 +39,24 @@ function Chatbot() {
         "Làm sao để đăng ký?"
       ];
 
-  // Load chat history from localStorage
+  // Load chat history from localStorage - DISABLED (không lưu lịch sử)
   useEffect(() => {
-    const savedMessages = localStorage.getItem('mozi_chat_history');
-    if (savedMessages) {
-      try {
-        setMessages(JSON.parse(savedMessages));
-      } catch (e) {
-        console.error('Error loading chat history:', e);
-      }
-    } else {
-      // Welcome message
+    // const savedMessages = localStorage.getItem('mozi_chat_history');
+    // if (savedMessages) {
+    //   try {
+    //     const parsed = JSON.parse(savedMessages);
+    //     // Restore messages without movie data (movies will be empty arrays)
+    //     const restored = parsed.map(msg => ({
+    //       ...msg,
+    //       movies: [] // Don't restore movie data, too heavy
+    //     }));
+    //     setMessages(restored);
+    //   } catch (e) {
+    //     console.error('Error loading chat history:', e);
+    //     localStorage.removeItem('mozi_chat_history');
+    //   }
+    // } else {
+      // Welcome message - Always show on load
       const welcomeMessage = isAuthenticated
         ? `Xin chào ${user?.fullName || 'bạn'}! Tôi là Mozi AI Assistant. Tôi có thể giúp bạn tìm phim, tư vấn gói đăng ký, và trả lời các câu hỏi về nền tảng. Bạn cần giúp gì?`
         : 'Xin chào! Tôi là Mozi AI Assistant. Tôi có thể giúp bạn tìm phim và trả lời các câu hỏi về nền tảng. Đăng nhập để trải nghiệm đầy đủ tính năng nhé! 😊';
@@ -60,15 +67,35 @@ function Chatbot() {
         content: welcomeMessage,
         timestamp: new Date()
       }]);
-    }
+    // }
   }, [isAuthenticated, user]);
 
-  // Save chat history to localStorage
-  useEffect(() => {
-    if (messages.length > 0) {
-      localStorage.setItem('mozi_chat_history', JSON.stringify(messages));
-    }
-  }, [messages]);
+  // Save chat history to localStorage - DISABLED (không lưu lịch sử)
+  // useEffect(() => {
+  //   if (messages.length > 0) {
+  //     // Only save last 50 messages to prevent localStorage overflow
+  //     const messagesToSave = messages.slice(-50).map(msg => ({
+  //       id: msg.id,
+  //       type: msg.type,
+  //       content: msg.content,
+  //       timestamp: msg.timestamp,
+  //       error: msg.error,
+  //       // Only save movie IDs, not full movie data
+  //       movieIds: msg.movies?.map(m => m._id) || []
+  //     }));
+  //     
+  //     try {
+  //       localStorage.setItem('mozi_chat_history', JSON.stringify(messagesToSave));
+  //     } catch (e) {
+  //       console.error('Error saving chat history:', e);
+  //       // If localStorage is full, clear old history
+  //       if (e.name === 'QuotaExceededError') {
+  //         localStorage.removeItem('mozi_chat_history');
+  //         console.log('localStorage full, cleared chat history');
+  //       }
+  //     }
+  //   }
+  // }, [messages]);
 
   // Auto scroll to bottom
   useEffect(() => {
