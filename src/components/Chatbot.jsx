@@ -233,6 +233,16 @@ function Chatbot() {
     });
   };
 
+  const formatMessageContent = (content) => {
+    // Replace \n with actual line breaks
+    return content.split('\n').map((line, index, array) => (
+      <span key={index}>
+        {line}
+        {index < array.length - 1 && <br />}
+      </span>
+    ));
+  };
+
   // Hide chatbot on specific pages or during loading
   const hiddenPaths = ['/login', '/register', '/admin'];
   const shouldHideChatbot = loading || hiddenPaths.some(path => location.pathname.startsWith(path));
@@ -329,7 +339,7 @@ function Chatbot() {
                 className={`message ${message.type}-message animate-fade-in`}
               >
                 <div className={`message-bubble ${message.error ? 'error' : ''}`}>
-                  <p>{message.content}</p>
+                  <p>{formatMessageContent(message.content)}</p>
                   
                   {/* Movie Card */}
                   {message.movieData && (

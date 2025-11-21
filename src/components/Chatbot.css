@@ -269,8 +269,10 @@ body:has(.video-player-active) .chatbot-container {
 .message-bubble p {
   margin: 0;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.6;
   word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .message-time {
