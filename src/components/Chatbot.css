@@ -298,9 +298,36 @@ body:has(.video-player-active) .chatbot-container {
   }
 }
 
+/* Movies List in Chat */
+.movies-list-chat {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.movies-list-chat::-webkit-scrollbar {
+  width: 6px;
+}
+
+.movies-list-chat::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.movies-list-chat::-webkit-scrollbar-thumb {
+  background: rgba(229, 9, 20, 0.5);
+  border-radius: 3px;
+}
+
+.movies-list-chat::-webkit-scrollbar-thumb:hover {
+  background: rgba(229, 9, 20, 0.7);
+}
+
 /* Movie Card in Chat */
 .movie-card-chat {
-  margin-top: 10px;
   display: flex;
   gap: 10px;
   background: #1a1a1a;
@@ -312,9 +339,10 @@ body:has(.video-player-active) .chatbot-container {
 }
 
 .movie-card-chat:hover {
-  transform: scale(1.02);
+  transform: translateX(4px);
   box-shadow: 0 4px 16px rgba(229, 9, 20, 0.3);
   border-color: #E50914;
+  background: #222;
 }
 
 .movie-poster-chat {

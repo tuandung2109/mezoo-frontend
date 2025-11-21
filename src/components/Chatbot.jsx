@@ -168,7 +168,7 @@ function Chatbot() {
         id: Date.now() + 1,
         type: 'bot',
         content: response.data.data.response,
-        movieData: response.data.data.movieData,
+        movies: response.data.data.movies || [],
         timestamp: new Date()
       };
 
@@ -341,37 +341,42 @@ function Chatbot() {
                 <div className={`message-bubble ${message.error ? 'error' : ''}`}>
                   <p>{formatMessageContent(message.content)}</p>
                   
-                  {/* Movie Card */}
-                  {message.movieData && (
-                    <div 
-                      className="movie-card-chat"
-                      onClick={() => {
-                        navigate(`/movie/${message.movieData._id}`);
-                        setIsOpen(false);
-                      }}
-                    >
-                      <img 
-                        src={message.movieData.poster} 
-                        alt={message.movieData.title}
-                        className="movie-poster-chat"
-                      />
-                      <div className="movie-info-chat">
-                        <h4>{message.movieData.title}</h4>
-                        <div className="movie-meta-chat">
-                          <span className="movie-rating-chat">
-                            <FaStar size={12} />
-                            {message.movieData.rating?.toFixed(1) || 'N/A'}
-                          </span>
-                          <span>{new Date(message.movieData.releaseDate).getFullYear()}</span>
-                        </div>
-                        {message.movieData.genres && (
-                          <div className="movie-genres-chat">
-                            {message.movieData.genres.slice(0, 2).map((genre, idx) => (
-                              <span key={idx} className="genre-tag-chat">{genre}</span>
-                            ))}
+                  {/* Movie Cards List */}
+                  {message.movies && message.movies.length > 0 && (
+                    <div className="movies-list-chat">
+                      {message.movies.map((movie) => (
+                        <div 
+                          key={movie._id}
+                          className="movie-card-chat"
+                          onClick={() => {
+                            navigate(`/movie/${movie._id}`);
+                            setIsOpen(false);
+                          }}
+                        >
+                          <img 
+                            src={movie.poster} 
+                            alt={movie.title}
+                            className="movie-poster-chat"
+                          />
+                          <div className="movie-info-chat">
+                            <h4>{movie.title}</h4>
+                            <div className="movie-meta-chat">
+                              <span className="movie-rating-chat">
+                                <FaStar size={12} />
+                                {movie.rating?.toFixed(1) || 'N/A'}
+                              </span>
+                              <span>{new Date(movie.releaseDate).getFullYear()}</span>
+                            </div>
+                            {movie.genres && (
+                              <div className="movie-genres-chat">
+                                {movie.genres.slice(0, 2).map((genre, idx) => (
+                                  <span key={idx} className="genre-tag-chat">{genre}</span>
+                                ))}
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      ))}
                     </div>
                   )}
                   
