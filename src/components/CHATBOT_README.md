@@ -176,7 +176,7 @@ Response:
 Trong `.env`:
 
 ```env
-VITE_API_URL=https://mezoo-backend.onrender.com/api
+VITE_API_URL=http://localhost:5000/api
 ```
 
 ## 📱 Screenshots

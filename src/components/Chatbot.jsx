@@ -9,7 +9,7 @@ import axios from 'axios';
 import Toast from './Toast';
 import './Chatbot.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://mezoo-backend.onrender.com/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 function Chatbot() {
   const { user, isAuthenticated, loading } = useAuth();

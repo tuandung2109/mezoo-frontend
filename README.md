@@ -133,7 +133,7 @@ npm run preview
 
 ## 🔗 API Endpoints
 
-Backend API: `https://mezoo-backend.onrender.com/api`
+Backend API: `http://localhost:5000/api`
 
 ### Movies & Auth
 - `GET /movies` - Danh sách phim
