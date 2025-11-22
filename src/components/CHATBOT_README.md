@@ -1,4 +1,4 @@
-# 🤖 Mozi AI Chatbot - Giao diện đẹp & Responsive
+# 🤖 mezoo AI Chatbot - Giao diện đẹp & Responsive
 
 ## ✨ Tính năng
 
@@ -77,7 +77,7 @@ function App() {
 
 **Header:**
 - Bot avatar với icon AI
-- Bot name: "Mozi AI Assistant"
+- Bot name: "mezoo AI Assistant"
 - Status: "Online" với green dot
 - Nút Clear History và Close
 
@@ -176,7 +176,7 @@ Response:
 Trong `.env`:
 
 ```env
-VITE_API_URL=https://mozi-backend.onrender.com/api
+VITE_API_URL=https://mezoo-backend.onrender.com/api
 ```
 
 ## 📱 Screenshots
@@ -184,10 +184,10 @@ VITE_API_URL=https://mozi-backend.onrender.com/api
 ### Desktop View
 ```
 ┌─────────────────────────────────────┐
-│  🤖 Mozi AI Assistant    🗑️ ✕     │
+│  🤖 mezoo AI Assistant    🗑️ ✕     │
 ├─────────────────────────────────────┤
 │                                     │
-│  Bot: Xin chào! Tôi là Mozi AI...  │
+│  Bot: Xin chào! Tôi là mezoo AI...  │
 │                                     │
 │              User: Gợi ý phim? 💬  │
 │                                     │
@@ -201,14 +201,14 @@ VITE_API_URL=https://mozi-backend.onrender.com/api
 ├─────────────────────────────────────┤
 │ [Gợi ý 1] [Gợi ý 2] [Gợi ý 3]     │
 ├─────────────────────────────────────┤
-│ [Nhắn tin cho Mozi AI...]    [📤]  │
+│ [Nhắn tin cho mezoo AI...]    [📤]  │
 └─────────────────────────────────────┘
 ```
 
 ### Mobile View
 ```
 ┌───────────────────────┐
-│ 🤖 Mozi AI  🗑️ ✕    │
+│ 🤖 mezoo AI  🗑️ ✕    │
 ├───────────────────────┤
 │                       │
 │ Bot: Xin chào!        │
@@ -273,4 +273,4 @@ VITE_API_URL=https://mozi-backend.onrender.com/api
 
 ---
 
-**Created with ❤️ for Mozi Movie Streaming Platform**
+**Created with ❤️ for mezoo Movie Streaming Platform**

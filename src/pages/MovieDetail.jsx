@@ -134,7 +134,7 @@ function MovieDetail() {
 
   const handleShare = (platform) => {
     const url = window.location.href;
-    const text = `Xem phim "${movie.title}" trên Mozi`;
+    const text = `Xem phim "${movie.title}" trên mezoo`;
 
     switch (platform) {
       case 'copy':

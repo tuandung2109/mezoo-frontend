@@ -75,7 +75,7 @@ function Register() {
       {/* Header with Logo */}
       <header className="relative z-10 px-8 py-6">
         <Link to="/">
-          <h1 className="text-netflix-red text-4xl font-bold">MOZI</h1>
+          <h1 className="text-netflix-red text-4xl font-bold">mezoo</h1>
         </Link>
       </header>
 
@@ -228,7 +228,7 @@ function Register() {
 
               {/* Login link */}
               <div className="text-center">
-                <span className="text-gray-400">Đã có tài khoản Mozi? </span>
+                <span className="text-gray-400">Đã có tài khoản mezoo? </span>
                 <Link to="/login" className="text-netflix-red hover:text-red-400 font-semibold transition-colors">
                   Đăng nhập ngay
                 </Link>

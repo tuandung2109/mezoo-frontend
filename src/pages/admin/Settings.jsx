@@ -53,7 +53,7 @@ const Settings = () => {
     } else {
       // Default values
       generalForm.setFieldsValue({
-        siteName: 'MOZI',
+        siteName: 'mezoo',
         siteDescription: 'Nền tảng xem phim trực tuyến hàng đầu',
         language: 'vi',
         timezone: 'Asia/Ho_Chi_Minh',
@@ -66,8 +66,8 @@ const Settings = () => {
         smtpHost: 'smtp.gmail.com',
         smtpPort: 587,
         smtpSecure: true,
-        senderName: 'MOZI',
-        senderEmail: 'noreply@mozi.com'
+        senderName: 'mezoo',
+        senderEmail: 'noreply@mezoo.com'
       });
 
       securityForm.setFieldsValue({
@@ -125,7 +125,7 @@ const Settings = () => {
                   name="siteName"
                   rules={[{ required: true, message: 'Vui lòng nhập tên website' }]}
                 >
-                  <Input placeholder="MOZI" />
+                  <Input placeholder="mezoo" />
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -281,7 +281,7 @@ const Settings = () => {
                   label="Tên người gửi"
                   name="senderName"
                 >
-                  <Input placeholder="MOZI" />
+                  <Input placeholder="mezoo" />
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -289,7 +289,7 @@ const Settings = () => {
                   label="Email người gửi"
                   name="senderEmail"
                 >
-                  <Input placeholder="noreply@mozi.com" />
+                  <Input placeholder="noreply@mezoo.com" />
                 </Form.Item>
               </Col>
             </Row>
@@ -458,7 +458,7 @@ const Settings = () => {
               name="cdnUrl"
               style={{ marginTop: 16 }}
             >
-              <Input placeholder="https://cdn.mozi.com" />
+              <Input placeholder="https://cdn.mezoo.com" />
             </Form.Item>
 
             <Divider />

@@ -9,7 +9,7 @@ import axios from 'axios';
 import Toast from './Toast';
 import './Chatbot.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://mozi-backend.onrender.com/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://mezoo-backend.onrender.com/api';
 
 function Chatbot() {
   const { user, isAuthenticated, loading } = useAuth();
@@ -35,13 +35,13 @@ function Chatbot() {
     : [
         "Gợi ý phim hành động hay",
         "Phim mới nhất là gì?",
-        "Mozi có những tính năng gì?",
+        "mezoo có những tính năng gì?",
         "Làm sao để đăng ký?"
       ];
 
   // Load chat history from localStorage - DISABLED (không lưu lịch sử)
   useEffect(() => {
-    // const savedMessages = localStorage.getItem('mozi_chat_history');
+    // const savedMessages = localStorage.getItem('mezoo_chat_history');
     // if (savedMessages) {
     //   try {
     //     const parsed = JSON.parse(savedMessages);
@@ -53,13 +53,13 @@ function Chatbot() {
     //     setMessages(restored);
     //   } catch (e) {
     //     console.error('Error loading chat history:', e);
-    //     localStorage.removeItem('mozi_chat_history');
+    //     localStorage.removeItem('mezoo_chat_history');
     //   }
     // } else {
       // Welcome message - Always show on load
       const welcomeMessage = isAuthenticated
-        ? `Xin chào ${user?.fullName || 'bạn'}! Tôi là Mozi AI Assistant. Tôi có thể giúp bạn tìm phim, tư vấn gói đăng ký, và trả lời các câu hỏi về nền tảng. Bạn cần giúp gì?`
-        : 'Xin chào! Tôi là Mozi AI Assistant. Tôi có thể giúp bạn tìm phim và trả lời các câu hỏi về nền tảng. Đăng nhập để trải nghiệm đầy đủ tính năng nhé! 😊';
+        ? `Xin chào ${user?.fullName || 'bạn'}! Tôi là mezoo AI Assistant. Tôi có thể giúp bạn tìm phim, tư vấn gói đăng ký, và trả lời các câu hỏi về nền tảng. Bạn cần giúp gì?`
+        : 'Xin chào! Tôi là mezoo AI Assistant. Tôi có thể giúp bạn tìm phim và trả lời các câu hỏi về nền tảng. Đăng nhập để trải nghiệm đầy đủ tính năng nhé! 😊';
       
       setMessages([{
         id: Date.now(),
@@ -85,12 +85,12 @@ function Chatbot() {
   //     }));
   //     
   //     try {
-  //       localStorage.setItem('mozi_chat_history', JSON.stringify(messagesToSave));
+  //       localStorage.setItem('mezoo_chat_history', JSON.stringify(messagesToSave));
   //     } catch (e) {
   //       console.error('Error saving chat history:', e);
   //       // If localStorage is full, clear old history
   //       if (e.name === 'QuotaExceededError') {
-  //         localStorage.removeItem('mozi_chat_history');
+  //         localStorage.removeItem('mezoo_chat_history');
   //         console.log('localStorage full, cleared chat history');
   //       }
   //     }
@@ -241,7 +241,7 @@ function Chatbot() {
         content: 'Lịch sử chat đã được xóa. Bạn cần giúp gì?',
         timestamp: new Date()
       }]);
-      localStorage.removeItem('mozi_chat_history');
+      localStorage.removeItem('mezoo_chat_history');
       showToast('Đã xóa lịch sử chat', 'success');
     }
   };
@@ -333,7 +333,7 @@ function Chatbot() {
                 <FaRobot size={24} />
               </div>
               <div className="bot-info">
-                <h3>Mozi AI Assistant</h3>
+                <h3>mezoo AI Assistant</h3>
                 <span className="bot-status">
                   <span className="status-dot"></span>
                   Online
@@ -450,7 +450,7 @@ function Chatbot() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Nhắn tin cho Mozi AI..."
+              placeholder="Nhắn tin cho mezoo AI..."
               disabled={isTyping}
               aria-label="Message input"
             />

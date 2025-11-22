@@ -37,8 +37,8 @@ function Footer() {
           </div>
         </div>
         <div className="text-center text-gray-400 pt-8 border-t border-gray-800">
-          <p className="text-2xl font-bold text-netflix-red mb-2">MOZI</p>
-          <p className="text-sm">© 2025 Mozi Movie Streaming Platform — Created by tuandung2109.</p>
+          <p className="text-2xl font-bold text-netflix-red mb-2">mezoo</p>
+          <p className="text-sm">© 2025 mezoo Movie Streaming Platform — Created by tuandung2109.</p>
         </div>
       </div>
     </footer>

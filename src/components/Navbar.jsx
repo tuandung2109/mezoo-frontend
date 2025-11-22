@@ -106,7 +106,7 @@ function Navbar() {
               lineHeight: '1'
             }}
           >
-            MOZI
+            mezoo
           </div>
           <div className="hidden md:flex items-center space-x-6 text-base font-medium">
             <button onClick={() => navigate('/')} className="hover:text-gray-300 transition whitespace-nowrap">Trang chủ</button>

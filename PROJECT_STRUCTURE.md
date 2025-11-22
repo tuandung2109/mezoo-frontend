@@ -1,4 +1,4 @@
-# 📁 Cấu Trúc Project Frontend Mozi
+# 📁 Cấu Trúc Project Frontend mezoo
 
 ## 🎯 Tổng Quan
 
@@ -88,7 +88,7 @@ frontend/
 
 ### **Loading.jsx**
 - Animated loading screen
-- Mozi logo with pulse effect
+- mezoo logo with pulse effect
 
 ---
 
@@ -203,7 +203,7 @@ Service Layer (services/movieService.js)
     ↓
 API Instance (services/api.js)
     ↓
-Backend API (https://mozi-backend.onrender.com/api)
+Backend API (https://mezoo-backend.onrender.com/api)
     ↓
 Response
     ↓

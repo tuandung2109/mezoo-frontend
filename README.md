@@ -1,6 +1,6 @@
-# Mozi Frontend - Movie Streaming Platform
+# mezoo Frontend - Movie Streaming Platform
 
-Frontend React cho nền tảng xem phim Mozi với giao diện Netflix-style.
+Frontend React cho nền tảng xem phim mezoo với giao diện Netflix-style.
 
 ## 🎨 Tech Stack
 
@@ -133,7 +133,7 @@ npm run preview
 
 ## 🔗 API Endpoints
 
-Backend API: `https://mozi-backend.onrender.com/api`
+Backend API: `https://mezoo-backend.onrender.com/api`
 
 ### Movies & Auth
 - `GET /movies` - Danh sách phim
@@ -171,11 +171,11 @@ Chatbot AI thông minh sử dụng **Google Gemini** để:
 - 🔍 Tìm kiếm phim theo thể loại, năm, rating
 - 💡 Trả lời câu hỏi về phim, diễn viên, đạo diễn
 - 🎯 Tư vấn gói đăng ký (Free, Basic, Premium, VIP)
-- ✨ Hướng dẫn sử dụng tính năng Mozi
+- ✨ Hướng dẫn sử dụng tính năng mezoo
 - 📊 Cá nhân hóa dựa trên lịch sử xem
 
 ### Cách sử dụng
-1. Đăng nhập vào Mozi
+1. Đăng nhập vào mezoo
 2. Click nút chat 💬 ở góc dưới phải
 3. Gõ câu hỏi và nhấn Enter
 4. Bot sẽ trả lời trong 1-3 giây
@@ -231,4 +231,4 @@ function App() {
 
 ## 📄 License
 
-© 2025 Mozi Movie Streaming Platform
+© 2025 mezoo Movie Streaming Platform
