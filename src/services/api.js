@@ -1,6 +1,24 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+// Auto-detect API URL based on environment
+const getApiUrl = () => {
+  // 1. Nếu có VITE_API_BASE_URL trong .env, dùng nó
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+  
+  // 2. Nếu đang chạy local (localhost hoặc 127.0.0.1), dùng local backend
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:5000/api';
+  }
+  
+  // 3. Nếu đang ở production, dùng production backend
+  return 'https://mozi-backend.onrender.com/api';
+};
+
+const API_URL = getApiUrl();
+
+console.log('🚀 API URL:', API_URL);
 
 const api = axios.create({
   baseURL: API_URL,
