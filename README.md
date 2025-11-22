@@ -133,7 +133,7 @@ npm run preview
 
 ## 🔗 API Endpoints
 
-Backend API: `http://localhost:5000/api`
+Backend API: `https://mozi-backend.onrender.com/api`
 
 ### Movies & Auth
 - `GET /movies` - Danh sách phim

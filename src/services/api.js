@@ -9,7 +9,7 @@ const getApiUrl = () => {
   
   // 2. Nếu đang chạy local (localhost hoặc 127.0.0.1), dùng local backend
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return 'http://localhost:5000/api';
+    return 'https://mozi-backend.onrender.com/api';
   }
   
   // 3. Nếu đang ở production, dùng production backend
