@@ -203,7 +203,7 @@ Service Layer (services/movieService.js)
     ↓
 API Instance (services/api.js)
     ↓
-Backend API (http://localhost:5000/api)
+Backend API (https://mezoo-backend.onrender.com/api)
     ↓
 Response
     ↓

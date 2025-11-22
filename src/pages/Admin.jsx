@@ -168,7 +168,7 @@ function Admin() {
           fontSize: collapsed ? 20 : 24,
           fontWeight: 'bold'
         }}>
-          {collapsed ? 'M' : 'mezoo ADMIN'}
+          {collapsed ? 'M' : 'MEZOO ADMIN'}
         </div>
         <Menu
           theme="dark"
