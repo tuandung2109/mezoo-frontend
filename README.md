@@ -1,4 +1,4 @@
-# mezoo Frontend - Movie Streaming Platform
+# MEZOO Frontend - Movie Streaming Platform
 
 Frontend React cho nền tảng xem phim mezoo với giao diện Netflix-style.
 
