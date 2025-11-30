@@ -252,7 +252,6 @@ function Register() {
                       onError={() => {
                         setError('Đăng ký Google thất bại');
                       }}
-                      useOneTap
                       theme="filled_black"
                       shape="pill"
                       width="100%"
