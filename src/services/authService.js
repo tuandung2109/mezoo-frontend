@@ -11,6 +11,11 @@ export const authService = {
     return api.post('/auth/login', credentials);
   },
 
+  // Social Login
+  socialLogin: (data) => {
+    return api.post('/auth/social-login', data);
+  },
+
   // Get current user
   getCurrentUser: () => {
     return api.get('/auth/me');

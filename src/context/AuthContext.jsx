@@ -77,6 +77,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const socialLogin = async (data) => {
+    try {
+      const response = await authService.socialLogin(data);
+      const { token, ...userData } = response.data.data;
+      
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userData));
+      
+      setToken(token);
+      setUser(userData);
+      
+      return { success: true, user: userData };
+    } catch (error) {
+      return { 
+        success: false, 
+        message: error.response?.data?.message || 'Đăng nhập mạng xã hội thất bại' 
+      };
+    }
+  };
+
   const register = async (userData) => {
     try {
       const response = await authService.register(userData);
@@ -113,6 +133,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     isAuthenticated: !!user,
     login,
+    socialLogin,
     register,
     logout,
     updateUser

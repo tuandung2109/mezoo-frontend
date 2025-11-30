@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../context/AuthContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { welcomeUser } from '../utils/textToSpeech';
@@ -7,7 +8,7 @@ import { welcomeUser } from '../utils/textToSpeech';
 function Login() {
   useDocumentTitle('Đăng nhập');
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, socialLogin } = useAuth();
   const [formData, setFormData] = useState({
     email: 'dinhtuandung10a6@gmail.com',
     password: '123456'
@@ -22,6 +23,21 @@ function Login() {
       [e.target.name]: e.target.value
     });
     setError('');
+  };
+
+  const handleSocialLogin = async (provider, token) => {
+    setLoading(true);
+    setError('');
+    const result = await socialLogin({ provider, token });
+    
+    if (result.success) {
+      const userName = result.user?.fullName || result.user?.username || 'bạn';
+      welcomeUser(userName);
+      navigate('/');
+    } else {
+      setError(result.message);
+    }
+    setLoading(false);
   };
 
   const handleSubmit = async (e) => {
@@ -182,13 +198,31 @@ function Login() {
               </form>
 
               {/* Divider */}
-              <div className="relative my-8">
+              <div className="relative my-6">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-white/10"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-black/90 text-gray-400">hoặc</span>
+                  <span className="px-4 bg-black/90 text-gray-400">hoặc đăng nhập với</span>
                 </div>
+              </div>
+
+              {/* Social Login */}
+              <div className="flex flex-col gap-3 mb-8">
+                  <div className="flex items-center justify-center w-full">
+                    <GoogleLogin
+                      onSuccess={credentialResponse => {
+                        handleSocialLogin('google', credentialResponse.credential);
+                      }}
+                      onError={() => {
+                        setError('Đăng nhập Google thất bại');
+                      }}
+                      useOneTap
+                      theme="filled_black"
+                      shape="pill"
+                      width="100%"
+                    />
+                  </div>
               </div>
 
               {/* Sign up link */}
