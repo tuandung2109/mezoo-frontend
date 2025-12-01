@@ -11,7 +11,7 @@ function Login() {
   const { login, socialLogin } = useAuth();
   const [formData, setFormData] = useState({
     email: 'dinhtuandung10a6@gmail.com',
-    password: '123456'
+    password: 'tuandung2109'
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
