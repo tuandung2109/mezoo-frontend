@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
@@ -39,6 +39,26 @@ function Chatbot() {
         "Làm sao để đăng ký?"
       ];
 
+  const getUserDisplayName = () => {
+    if (!user) return 'bạn';
+    return user.fullName || user.name || user.username || user.email?.split('@')[0] || 'bạn';
+  };
+
+  const buildWelcomeMessage = useCallback(() => ({
+    id: 'chatbot-welcome',
+    type: 'bot',
+    content: isAuthenticated
+      ? `Xin chào ${getUserDisplayName()}! Mình là Mezoo AI, bạn muốn xem gì hôm nay?`
+      : 'Xin chào! Mình là Mezoo AI, bạn cần gợi ý phim hay muốn tìm hiểu tính năng nào? 😊',
+    timestamp: new Date()
+  }), [isAuthenticated, user]);
+
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      setMessages([buildWelcomeMessage()]);
+    }
+  }, [isOpen, messages, buildWelcomeMessage]);
+
   // Load chat history from API
   useEffect(() => {
     const fetchHistory = async () => {
@@ -50,25 +70,26 @@ function Chatbot() {
           });
           
           if (response.data.success && response.data.data.length > 0) {
-            // Format messages for UI
-            const historyMessages = response.data.data.reverse().map(msg => ({
-              id: msg._id,
-              type: msg.role === 'user' ? 'user' : 'bot',
-              content: msg.content,
-              timestamp: new Date(msg.createdAt)
-            }));
-            
+            // Ensure messages stay in chronological order (oldest at top)
+            const sortedHistory = response.data.data
+              .slice()
+              .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+              .map(msg => ({
+                id: msg._id,
+                type: msg.role === 'user' ? 'user' : 'bot',
+                content: msg.content,
+                timestamp: new Date(msg.createdAt)
+              }));
+
+            const historyIds = new Set(sortedHistory.map(msg => msg.id));
+
             setMessages(prev => {
-              // Merge history with current messages, avoiding duplicates
-              const existingIds = new Set(prev.map(m => m.id));
-              const newMessages = historyMessages.filter(m => !existingIds.has(m.id));
-              
-              // If we only have the welcome message, replace it with history + welcome
-              if (prev.length === 1 && prev[0].id && String(prev[0].id).length < 20) { // Simple check for local ID vs Mongo ID
-                 return [...newMessages, ...prev];
-              }
-              
-              return [...newMessages, ...prev];
+              // Remove placeholder welcome message and previously fetched history entries
+              const remainingLocalMessages = prev
+                .filter(msg => msg.id !== 'chatbot-welcome')
+                .filter(msg => !historyIds.has(msg.id));
+
+              return [...sortedHistory, ...remainingLocalMessages];
             });
           }
         } catch (error) {
