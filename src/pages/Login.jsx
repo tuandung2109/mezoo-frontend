@@ -148,10 +148,10 @@ function Login() {
                     required
                     className="w-full pl-12 pr-12 py-4 bg-white/5 text-white rounded-xl border border-white/10 focus:outline-none focus:border-netflix-red focus:ring-2 focus:ring-netflix-red/50 placeholder-gray-500 transition-all duration-300 hover:bg-white/10"
                   />
-                  <button
+                                    <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-netflix-red transition-colors"
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-white transition-colors"
                   >
                     {showPassword ? (
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,6 +165,10 @@ function Login() {
                     )}
                   </button>
                 </div>
+
+
+
+
 
                 {/* Submit Button with Gradient */}
                 <button
@@ -191,9 +195,9 @@ function Login() {
                     <input type="checkbox" className="mr-2 w-4 h-4 rounded border-gray-600 text-netflix-red focus:ring-netflix-red focus:ring-offset-0" />
                     <span>Ghi nhớ tôi</span>
                   </label>
-                  <a href="#" className="text-gray-300 hover:text-netflix-red transition-colors">
+                  <Link to="/forgot-password" className="text-gray-300 hover:text-netflix-red transition-colors">
                     Quên mật khẩu?
-                  </a>
+                  </Link>
                 </div>
               </form>
 

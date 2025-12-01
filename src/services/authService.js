@@ -31,6 +31,16 @@ export const authService = {
     return api.put('/auth/updatepassword', data);
   },
 
+  // Forgot Password
+  forgotPassword: (email) => {
+    return api.post('/auth/forgotpassword', { email });
+  },
+
+  // Reset Password
+  resetPassword: (token, password) => {
+    return api.put(`/auth/resetpassword/${token}`, { password });
+  },
+
   // Logout
   logout: () => {
     localStorage.removeItem('token');

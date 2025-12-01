@@ -39,63 +39,46 @@ function Chatbot() {
         "Làm sao để đăng ký?"
       ];
 
-  // Load chat history from localStorage - DISABLED (không lưu lịch sử)
+  // Load chat history from API
   useEffect(() => {
-    // const savedMessages = localStorage.getItem('Mezoo_chat_history');
-    // if (savedMessages) {
-    //   try {
-    //     const parsed = JSON.parse(savedMessages);
-    //     // Restore messages without movie data (movies will be empty arrays)
-    //     const restored = parsed.map(msg => ({
-    //       ...msg,
-    //       movies: [] // Don't restore movie data, too heavy
-    //     }));
-    //     setMessages(restored);
-    //   } catch (e) {
-    //     console.error('Error loading chat history:', e);
-    //     localStorage.removeItem('Mezoo_chat_history');
-    //   }
-    // } else {
-      // Welcome message - Always show on load
-      const welcomeMessage = isAuthenticated
-        ? `Xin chào ${user?.fullName || 'bạn'}! Tôi là Mezoo AI Assistant. Tôi có thể giúp bạn tìm phim, tư vấn gói đăng ký, và trả lời các câu hỏi về nền tảng. Bạn cần giúp gì?`
-        : 'Xin chào! Tôi là Mezoo AI Assistant. Tôi có thể giúp bạn tìm phim và trả lời các câu hỏi về nền tảng. Đăng nhập để trải nghiệm đầy đủ tính năng nhé! 😊';
-      
-      setMessages([{
-        id: Date.now(),
-        type: 'bot',
-        content: welcomeMessage,
-        timestamp: new Date()
-      }]);
-    // }
-  }, [isAuthenticated, user]);
+    const fetchHistory = async () => {
+      if (isAuthenticated && isOpen) {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await axios.get(`${API_URL}/chat/history`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          
+          if (response.data.success && response.data.data.length > 0) {
+            // Format messages for UI
+            const historyMessages = response.data.data.reverse().map(msg => ({
+              id: msg._id,
+              type: msg.role === 'user' ? 'user' : 'bot',
+              content: msg.content,
+              timestamp: new Date(msg.createdAt)
+            }));
+            
+            setMessages(prev => {
+              // Merge history with current messages, avoiding duplicates
+              const existingIds = new Set(prev.map(m => m.id));
+              const newMessages = historyMessages.filter(m => !existingIds.has(m.id));
+              
+              // If we only have the welcome message, replace it with history + welcome
+              if (prev.length === 1 && prev[0].id && String(prev[0].id).length < 20) { // Simple check for local ID vs Mongo ID
+                 return [...newMessages, ...prev];
+              }
+              
+              return [...newMessages, ...prev];
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching chat history:', error);
+        }
+      }
+    };
 
-  // Save chat history to localStorage - DISABLED (không lưu lịch sử)
-  // useEffect(() => {
-  //   if (messages.length > 0) {
-  //     // Only save last 50 messages to prevent localStorage overflow
-  //     const messagesToSave = messages.slice(-50).map(msg => ({
-  //       id: msg.id,
-  //       type: msg.type,
-  //       content: msg.content,
-  //       timestamp: msg.timestamp,
-  //       error: msg.error,
-  //       // Only save movie IDs, not full movie data
-  //       movieIds: msg.movies?.map(m => m._id) || []
-  //     }));
-  //     
-  //     try {
-  //       localStorage.setItem('Mezoo_chat_history', JSON.stringify(messagesToSave));
-  //     } catch (e) {
-  //       console.error('Error saving chat history:', e);
-  //       // If localStorage is full, clear old history
-  //       if (e.name === 'QuotaExceededError') {
-  //         localStorage.removeItem('Mezoo_chat_history');
-  //         console.log('localStorage full, cleared chat history');
-  //       }
-  //     }
-  //   }
-  // }, [messages]);
+    fetchHistory();
+  }, [isAuthenticated, isOpen]);
 
   // Auto scroll to bottom
   useEffect(() => {
@@ -233,16 +216,31 @@ function Chatbot() {
     setTimeout(() => handleSendMessage(), 100);
   };
 
-  const handleClearHistory = () => {
+  const handleClearHistory = async () => {
     if (window.confirm('Bạn có chắc muốn xóa lịch sử chat?')) {
-      setMessages([{
-        id: Date.now(),
-        type: 'bot',
-        content: 'Lịch sử chat đã được xóa. Bạn cần giúp gì?',
-        timestamp: new Date()
-      }]);
-      localStorage.removeItem('Mezoo_chat_history');
-      showToast('Đã xóa lịch sử chat', 'success');
+      try {
+        // Clear on server if authenticated
+        if (isAuthenticated) {
+          const token = localStorage.getItem('token');
+          await axios.delete(`${API_URL}/chat/history`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+        }
+
+        // Clear local state
+        setMessages([{
+          id: Date.now(),
+          type: 'bot',
+          content: 'Lịch sử chat đã được xóa. Bạn cần giúp gì?',
+          timestamp: new Date()
+        }]);
+        
+        localStorage.removeItem('Mezoo_chat_history');
+        showToast('Đã xóa lịch sử chat', 'success');
+      } catch (error) {
+        console.error('Error clearing history:', error);
+        showToast('Không thể xóa lịch sử chat', 'error');
+      }
     }
   };
 
