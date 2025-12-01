@@ -269,7 +269,7 @@ function Chatbot() {
   };
 
   // Hide chatbot on specific pages or during loading
-  const hiddenPaths = ['/login', '/register', '/admin'];
+  const hiddenPaths = ['/login', '/register', '/admin', '/forgot-password'];
   const shouldHideChatbot = loading || hiddenPaths.some(path => location.pathname.startsWith(path));
 
   // Auto-close chatbot when navigating to hidden pages
