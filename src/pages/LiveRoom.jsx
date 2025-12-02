@@ -210,7 +210,7 @@ function LiveRoom() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#05060a] text-white overflow-hidden">
+    <div className="relative min-h-screen bg-black text-white overflow-hidden">
       <div className="live-room-bg" />
       <div className="live-room-bg live-room-bg-2" />
       <div className="live-aurora" />
@@ -496,6 +496,7 @@ function LiveRoom() {
                   </div>
                 </div>
               )}
+
             </section>
 
             <aside className="space-y-6">
@@ -591,6 +592,14 @@ function LiveRoom() {
           </div>
         </div>
       </main>
+
+      <div className="live-dev-toast" role="status" aria-live="polite">
+        <span className="live-dev-toast-dot" aria-hidden="true" />
+        <div>
+          <p className="font-semibold text-sm">Phòng live đang được phát triển</p>
+          <p className="text-xs text-white/70">Tính năng thử nghiệm — giao diện sẽ còn được nâng cấp.</p>
+        </div>
+      </div>
 
       {showTheater && (
         <div className="fixed inset-0 z-[999] bg-black/90 backdrop-blur-sm flex items-center justify-center px-4">
