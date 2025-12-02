@@ -18,7 +18,7 @@ function ForgotPassword() {
 
     try {
       await authService.forgotPassword(email);
-      setMessage('Email khôi phục mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư của bạn.');
+      setMessage('Email khôi phục mật khẩu đã được gửi. Vui lòng kiểm tra cả hộp thư chính và thư rác (Spam).');
     } catch (err) {
       setError(err.response?.data?.message || 'Có lỗi xảy ra. Vui lòng thử lại.');
     } finally {
@@ -91,6 +91,12 @@ function ForgotPassword() {
                 >
                   {loading ? 'Đang gửi...' : 'Gửi email khôi phục'}
                 </button>
+
+                {message && (
+                  <p className="text-xs text-gray-400 text-center">
+                    Nếu chưa thấy email, hãy kiểm tra thư mục Spam và đánh dấu "Không phải spam" để lần sau vào hộp thư chính.
+                  </p>
+                )}
               </form>
 
               <div className="mt-6 text-center">
