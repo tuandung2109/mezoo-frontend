@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaBell, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart, FaHistory, FaCrown, FaCog, FaChartLine } from 'react-icons/fa';
+import { FaBell, FaBroadcastTower, FaCaretDown, FaUser, FaSignOutAlt, FaBars, FaHome, FaFilm, FaFire, FaHeart, FaHistory, FaCrown, FaCog, FaChartLine } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SearchBar from './SearchBar';
 import { notificationService } from '../services/notificationService';
@@ -112,6 +112,10 @@ function Navbar() {
             <button onClick={() => navigate('/')} className="hover:text-gray-300 transition whitespace-nowrap">Trang chủ</button>
             <button onClick={() => navigate('/movies')} className="hover:text-gray-300 transition whitespace-nowrap">Phim</button>
             <button onClick={() => navigate('/trending')} className="hover:text-gray-300 transition whitespace-nowrap">Mới & Phổ biến</button>
+            <button onClick={() => navigate('/live-room')} className="hover:text-gray-300 transition whitespace-nowrap flex items-center gap-1">
+              <FaBroadcastTower size={14} />
+              <span>Phòng live</span>
+            </button>
             <button onClick={() => navigate('/my-list')} className="hover:text-gray-300 transition whitespace-nowrap">Danh sách của tôi</button>
             <button onClick={() => navigate('/history')} className="hover:text-gray-300 transition whitespace-nowrap">Lịch sử</button>
             {user?.role === 'admin' && (
@@ -253,6 +257,13 @@ function Navbar() {
                       >
                         <FaHeart size={14} />
                         <span>Danh sách của tôi</span>
+                      </button>
+                      <button 
+                        onClick={() => { navigate('/live-room'); setShowDropdown(false); }}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-800 flex items-center space-x-2"
+                      >
+                        <FaBroadcastTower size={14} />
+                        <span>Phòng live</span>
                       </button>
                       <button 
                         onClick={() => { navigate('/history'); setShowDropdown(false); }}
